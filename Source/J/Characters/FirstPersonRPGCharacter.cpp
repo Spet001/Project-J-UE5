@@ -20,15 +20,15 @@ AFirstPersonRPGCharacter::AFirstPersonRPGCharacter()
 	FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCamera->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCamera->SetRelativeLocation(FVector(0.0f, 0.0f, 64.0f)); // Altura dos olhos
-	FirstPersonCamera->bUsePawnControlRotation = true;
+	FirstPersonCamera->bUsePawnControlRotation = false; // Câmera segue o Pawn, não o Controller
 
 	// Configurar movimento
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bUseControllerDesiredRotation = false;
 	
-	// Desabilitar rotação do controller no modo grid
+	// Desabilitar rotação automática do controller
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;  // Importante: desabilitar para Grid mode
 	bUseControllerRotationRoll = false;
 }
 
@@ -268,11 +268,8 @@ void AFirstPersonRPGCharacter::ProcessGridRotation(float DeltaTime)
 		// Rotação completa
 		GridRotationProgress = 1.0f;
 		
-		// Atualizar rotação do controller
-		if (Controller)
-		{
-			Controller->SetControlRotation(TargetGridRotation);
-		}
+		// Atualizar rotação do ACTOR (não do controller)
+		SetActorRotation(TargetGridRotation);
 		
 		bIsRotatingOnGrid = false;
 	}
@@ -282,17 +279,15 @@ void AFirstPersonRPGCharacter::ProcessGridRotation(float DeltaTime)
 		float SmoothProgress = FMath::InterpEaseInOut(0.0f, 1.0f, GridRotationProgress, 2.0f);
 		FRotator NewRotation = FMath::Lerp(StartGridRotation, TargetGridRotation, SmoothProgress);
 		
-		if (Controller)
-		{
-			Controller->SetControlRotation(NewRotation);
-		}
+		// Rotacionar o ACTOR diretamente
+		SetActorRotation(NewRotation);
 	}
 }
 
 FVector AFirstPersonRPGCharacter::CalculateNextGridPosition(EGridDirection Direction) const
 {
 	FVector CurrentPos = GetActorLocation();
-	FRotator CurrentRot = Controller ? Controller->GetControlRotation() : GetActorRotation();
+	FRotator CurrentRot = GetActorRotation(); // Usar rotação do Actor
 	
 	// Obter direção forward baseada na rotação atual
 	FVector ForwardDir = FRotationMatrix(FRotator(0, CurrentRot.Yaw, 0)).GetUnitAxis(EAxis::X);

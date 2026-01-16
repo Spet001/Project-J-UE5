@@ -13,8 +13,7 @@ public class J : ModuleRules
 			"CoreUObject", 
 			"Engine", 
 			"InputCore", 
-			"EnhancedInput",
-			"UMG"  // Para UI (Widget Blueprints)
+			"EnhancedInput"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { 
@@ -28,8 +27,7 @@ public class J : ModuleRules
 			"J/Core",
 			"J/Characters",
 			"J/Combat",
-			"J/Encounters",
-			"J/UI"
+			"J/Encounters"
 		});
 	}
 }
