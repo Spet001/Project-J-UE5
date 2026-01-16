@@ -1,0 +1,82 @@
+# Unreal Engine 5 .gitignore
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# Compiled files
+Binaries/
+Intermediate/
+DerivedDataCache/
+
+# Build artifacts
+Build/
+
+# Saved data (logs, autosaves, screenshots, etc.)
+Saved/
+
+# User-specific files
+*.user
+
+# Unreal specific
+*.VC.db
+*.VC.VC.opendb
+
+# Crashpad
+Crashpad/
+
+# Thumbnails
+*.thumb
+
+# Asset caches
+*.upk
+*.uasset.temp
+
+# Local content folder
+Content/Developers/
+
+# Visual Studio Code
+.vscode/
+
+# Mac specific
+.DS_Store
+*.swp
+*~.nib
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Packaging
+Releases/
+Packages/
+
+# Debug files
+*.pdb
+
+# Shader cache
+ShaderCache/
+
+# Script plugins (if auto-generated)
+Plugins/*/Intermediate/
+Plugins/*/Binaries/
+
+# Content not to be versioned (large files)
+# Content/Movies/
+# Content/Audio/
+
+# =============================================
+# KEEP THESE FILES (important for the project)
+# =============================================
+# !Content/
+# !Config/
+# !Source/
+# !*.uproject
+# !Plugins/ (if you have custom plugins)
