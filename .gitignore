@@ -72,6 +72,12 @@ Plugins/*/Binaries/
 # Content/Movies/
 # Content/Audio/
 
+# FAB / Marketplace Assets (arquivos pesados)
+Content/Fab/
+Content/Megaplant_Library/
+Content/GV_FreeShrubsPack/
+Content/Stylish_Fire_VFX/
+
 # =============================================
 # KEEP THESE FILES (important for the project)
 # =============================================
